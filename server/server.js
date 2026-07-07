@@ -3,8 +3,6 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const connectDB = require("./config/db");
-const User = require("./models/User");
-
 const authRoutes = require("./routes/authRoutes");
 const resumeRoutes = require("./routes/resumeRoutes");
 
@@ -21,13 +19,11 @@ app.get("/", (req, res) => {
   res.send("API Running");
 });
 
-app.get("/test", async (req, res) => {
-  const user = await User.create({
-    name: "Maharishi",
-    email: "test@gmail.com",
+app.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "Backend is running",
   });
-
-  res.json(user);
 });
 
 app.use("/api/auth", authRoutes);
